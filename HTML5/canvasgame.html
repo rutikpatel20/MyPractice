@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Game</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .canvas_div{
+            width: 100vw;
+            height: 100vh;
+            display: grid;
+            place-items: center;
+            background: rgb(56, 56, 56);
+        }
+    </style>
+</head>
+<body>
+    <div class="canvas_div">
+        <canvas id="myCanvas" style="border:1px solid red;">
+    </div>
+    
+
+    <script>
+        const canvas = document.getElementById("myCanvas");
+        const context = canvas.getContext("2d");
+
+        const width = 400;
+        const height = 600;
+
+        canvas.width = width;
+        canvas.height = height;
+
+        // Main Rectangle
+        context.fillStyle = "black";
+        context.fillRect(0, 0, width, height);
+
+        let paddlewidth = 50;
+        let paddleheight = 10;
+
+        // Create Top Paddle
+        context.fillStyle = "yellow";
+        context.fillRect(175, 10, paddlewidth, paddleheight);
+        // 400-50 = 350... 350/2 = 175
+
+        // Create Bottom Paddle
+        context.fillStyle = "yellow";
+        context.fillRect(175, height-20, paddlewidth, paddleheight);
+
+        // Create mid line 
+        context.beginPath();
+        context.setLineDash([6]);
+        context.moveTo(0, height / 2);
+        context.lineTo(width, height / 2);
+        context.strokeStyle = "white";
+        context.stroke();
+
+        // Create mid circle
+        context.beginPath();
+        context.arc(width/2, height/2, 10, 2*Math.PI, false); // x, y, radius, startangle, endangle, anticlockwise
+        context.fillStyle = "red";
+        context.fill();
+
+        // Create Numbers
+        context.font = "30px Times New Roman"
+        context.fillText(10, 20, height/2 - 30); // Text, x, y
+        context.fillText(15, 20, height/2 + 50); // Text, x, y
+    </script>
+</body>
+</html>
